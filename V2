@@ -1,4 +1,4 @@
-# Input 2x2 matrix and vector
+# Input 2x2 
 print("Enter the 2x2 matrix A:")
 a11 = float(input("Enter A[0,0]: "))
 a12 = float(input("Enter A[0,1]: "))
@@ -18,7 +18,7 @@ for row in A:
 print("\nVector b:")
 print(b)
 
-# Calculate determinant
+# |A|
 def determinant_2x2(matrix):
     return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
 
@@ -45,7 +45,6 @@ def gaussian_elimination(A, b):
     
     # Forward elimination
     for i in range(n):
-        # Make diagonal element 1
         pivot = Ab[i][i]
         for j in range(len(Ab[i])):
             Ab[i][j] = Ab[i][j] / pivot
@@ -54,7 +53,6 @@ def gaussian_elimination(A, b):
         for row in Ab:
             print([round(x, 4) for x in row])
         
-        # Eliminate column below
         for k in range(i + 1, n):
             factor = Ab[k][i]
             for j in range(len(Ab[k])):
@@ -75,16 +73,15 @@ def gaussian_elimination(A, b):
     return x
 
 x_gaussian = gaussian_elimination(A, b)
-print(f"\nSolution using Gaussian Elimination:")
+print(f"\nSolution using Gauss Eliminatn:")
 print(f"x = {x_gaussian}")
 
-# Inverse Matrix Method
+# M-¹
 def matrix_inverse_2x2(matrix):
     det = determinant_2x2(matrix)
     if abs(det) < 1e-10:
         return None
     
-    # For 2x2 matrix [[a,b],[c,d]], inverse is (1/det) * [[d,-b],[-c,a]]
     inv = [[matrix[1][1]/det, -matrix[0][1]/det],
            [-matrix[1][0]/det, matrix[0][0]/det]]
     return inv
@@ -107,25 +104,20 @@ x_inverse = matrix_vector_multiply(A_inv, b)
 print(f"\nSolution using Inverse Matrix Method:")
 print(f"x = {x_inverse}")
 
-# LU Decomposition
+# L U Decomp
 def lu_decomposition_2x2(matrix):
     # Initialize L and U matrices
     L = [[0, 0], [0, 0]]
     U = [[0, 0], [0, 0]]
     
-    # For 2x2 matrix
-    # L = [[1, 0], [l21, 1]]
-    # U = [[u11, u12], [0, u22]]
     
-    # Calculate U first row
+    #  Upper ∆
     U[0][0] = matrix[0][0]
     U[0][1] = matrix[0][1]
     
-    # Calculate L first column
+    # L ∆
     L[0][0] = 1
     L[1][0] = matrix[1][0] / U[0][0]
-    
-    # Calculate remaining elements
     L[1][1] = 1
     U[1][1] = matrix[1][1] - L[1][0] * U[0][1]
     
@@ -148,7 +140,7 @@ print("U matrix:")
 for row in U:
     print([round(x, 4) for x in row])
 
-# Transpose of matrix
+# Transpose
 def matrix_transpose(matrix):
     rows = len(matrix)
     cols = len(matrix[0])
@@ -165,19 +157,17 @@ print(f"\nTranspose of matrix A:")
 for row in A_transpose:
     print(row)
 
-# Simple ASCII visualization
+# visualizatio
 def plot_equations(A, b, solution):
     print(f"\nVisualization of the system:")
     print(f"Equation 1: {A[0][0]}x + {A[0][1]}y = {b[0]}")
     print(f"Equation 2: {A[1][0]}x + {A[1][1]}y = {b[1]}")
     print(f"Solution point: ({solution[0]:.2f}, {solution[1]:.2f})")
     
-    # Create simple ASCII plot
     print(f"\nASCII Plot (approximate):")
     print("y")
     print("^")
     
-    # Calculate y values for x = -2, -1, 0, 1, 2, 3, 4
     x_vals = [-2, -1, 0, 1, 2, 3, 4]
     print("Points on Line 1 (y = (c1 - a1*x) / b1):")
     for x in x_vals:
@@ -206,7 +196,7 @@ def verify_solution(A, x, b):
     error = error ** 0.5
     print(f"Error = {error}")
     
-    # Verify LU decomposition
+    # LU decomposition
     LU_product = matrix_multiply_2x2(L, U)
     print(f"\nLU Verification:")
     print(f"L * U =")
