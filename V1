@@ -1,18 +1,17 @@
 
 import numpy as np
-import matplotlib.pyplot as plt
 
-# Input 2x2 matrix and vector
-A = np.array([[2, 1], 
-              [1, 3]])
-b = np.array([5, 7])
+# Input 2x2 
+A = np.array([[8, 9], 
+              [7, 10]])
+b = np.array([2, 4])
 
 print("Matrix A:")
 print(A)
 print("\nVector b:")
 print(b)
 
-# Gaussian Elimination Method
+# Gaussian 
 def gaussian_elimination(A, b):
     n = len(b)
     Ab = np.column_stack([A, b]).astype(float)
@@ -30,15 +29,13 @@ def gaussian_elimination(A, b):
     
     return x
 
-# Solve using Gaussian elimination
 x_gaussian = gaussian_elimination(A, b)
-print("\n# Solution using Gaussian Elimination:")
+print("\n# Solution Gaussian :")
 print(f"x = {x_gaussian}")
 
-# Inverse Matrix Method
+# Inv A
 A_inv = np.linalg.inv(A)
 x_inverse = np.dot(A_inv, b)
-print("\n# Solution using Inverse Matrix Method:")
 print(f"Inverse of A:\n{A_inv}")
 print(f"x = {x_inverse}")
 
@@ -49,12 +46,12 @@ def lu_decomposition(A):
     U = np.zeros_like(A, dtype=float)
     
     for i in range(n):
-        # Upper triangular matrix U
+        # Upper ∆  U
         for k in range(i, n):
             sum_val = sum(L[i][j] * U[j][k] for j in range(i))
             U[i][k] = A[i][k] - sum_val
         
-        # Lower triangular matrix L
+        # Lower ∆ L
         for k in range(i, n):
             if i == k:
                 L[i][i] = 1
@@ -81,10 +78,9 @@ print(A_transpose)
 
 x1_range = np.linspace(-2, 8, 100)
 
-# Line 1: 2*x1 + 1*x2 = 5 -> x2 = 5 - 2*x1
 x2_line1 = (b[0] - A[0,0]*x1_range) / A[0,1]
 
-# Line 2: 1*x1 + 3*x2 = 7 -> x2 = (7 - x1) / 3
+
 x2_line2 = (b[1] - A[1,0]*x1_range) / A[1,1]
 
 plt.figure(figsize=(8, 6))
@@ -100,8 +96,3 @@ plt.xlim(-1, 6)
 plt.ylim(-1, 5)
 plt.show()
 
-# Summary
-print("\n# Summary:")
-print(f"Solution: x₁ = {x_gaussian[0]:.4f}, x₂ = {x_gaussian[1]:.4f}")
-print(f"Verification: A*x = {np.dot(A, x_gaussian)}")
-print(f"Original b: {b}")
