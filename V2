@@ -31,14 +31,12 @@ if abs(det_A) < 1e-10:
 
 # Gaussian Elimination Method
 def gaussian_elimination(A, b):
-    # Create augmented matrix
     n = len(b)
     Ab = []
     for i in range(n):
         row = A[i][:] + [b[i]]
         Ab.append(row)
     
-    print("\nGaussian Elimination Steps:")
     print("Initial augmented matrix:")
     for row in Ab:
         print([round(x, 4) for x in row])
@@ -96,12 +94,12 @@ def matrix_vector_multiply(matrix, vector):
     return result
 
 A_inv = matrix_inverse_2x2(A)
-print(f"\nInverse of matrix A:")
+print(f"\nInverse A:")
 for row in A_inv:
     print([round(x, 4) for x in row])
 
 x_inverse = matrix_vector_multiply(A_inv, b)
-print(f"\nSolution using Inverse Matrix Method:")
+print(f"\nSolutio Inverse :")
 print(f"x = {x_inverse}")
 
 # L U Decomp
@@ -153,15 +151,13 @@ def matrix_transpose(matrix):
     return transpose
 
 A_transpose = matrix_transpose(A)
-print(f"\nTranspose of matrix A:")
+print(f"\nTranspose A:")
 for row in A_transpose:
     print(row)
 
 # visualizatio
 def plot_equations(A, b, solution):
-    print(f"\nVisualization of the system:")
-    print(f"Equation 1: {A[0][0]}x + {A[0][1]}y = {b[0]}")
-    print(f"Equation 2: {A[1][0]}x + {A[1][1]}y = {b[1]}")
+    print(f"\nVisualization:")
     print(f"Solution point: ({solution[0]:.2f}, {solution[1]:.2f})")
     
     print(f"\nASCII Plot (approximate):")
@@ -169,13 +165,13 @@ def plot_equations(A, b, solution):
     print("^")
     
     x_vals = [-2, -1, 0, 1, 2, 3, 4]
-    print("Points on Line 1 (y = (c1 - a1*x) / b1):")
+    print("Points on Line 1 (y = :")
     for x in x_vals:
         if A[0][1] != 0:
             y = (b[0] - A[0][0] * x) / A[0][1]
             print(f"  x = {x}, y = {y:.2f}")
     
-    print("Points on Line 2 (y = (c2 - a2*x) / b2):")
+    print("Points on Line 2 (y =:")
     for x in x_vals:
         if A[1][1] != 0:
             y = (b[1] - A[1][0] * x) / A[1][1]
